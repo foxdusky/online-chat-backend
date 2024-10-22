@@ -10,7 +10,8 @@ from sqlmodel import Session
 from configs.env import SECRET_KEY
 from db import get_session
 from repositories.user import auth_repository
-from schemes.user.user_scheme import User, AuthToken
+from schemes.user.user_scheme import User
+from schemes.user.auth_scheme import AuthToken
 
 password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/sign_in")
