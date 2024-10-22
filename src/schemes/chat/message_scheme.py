@@ -13,7 +13,7 @@ class MessageBase(SQLModel):
 
 class Message(MessageBase, table=True):
     __tablename__ = "message"
-    chat: list['Chat'] = Relationship(back_populates='messages')
+    chat: "Chat" = Relationship(back_populates='messages')
     actions: list['MessageAction'] = Relationship(back_populates='message')
     user: "User" = Relationship(back_populates='messages')
 
