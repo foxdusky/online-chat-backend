@@ -49,17 +49,17 @@ async def create_user(
         session: Session = Depends(get_session),
         current_user: User = Depends(get_current_user),
 ):
-    return user_model.create_user(session, user, current_user)
+    return user_model.create_user(session, user)
 
 
-@user_router.put("/", response_model=CurrentUser)
+@user_router.put("/", response_model=User)
 @ws_queue(queue_name)
 async def update_user(
-        user: UserEdit,
+        user: User,
         session: Session = Depends(get_session),
         current_user: User = Depends(get_current_user),
 ):
-    return user_model.update_user(session, user, current_user)
+    return user_model.update_user(session, user)
 
 
 @user_router.delete("/{user_id}", response_model=User)
@@ -69,4 +69,4 @@ async def delete_user(
         session: Session = Depends(get_session),
         current_user: User = Depends(get_current_user),
 ):
-    return user_model.delete_user(session, user_id, current_user)
+    return user_model.delete_user(session, user_id)
