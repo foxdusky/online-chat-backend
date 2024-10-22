@@ -14,4 +14,4 @@ class Chat(ChatBase, table=True):
 
 
 from schemes.chat.users_in_chat_scheme import UsersInChat
-from schemes.chat.message_scheme import Message
+from schemes.message.message_scheme import Message

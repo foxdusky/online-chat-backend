@@ -27,5 +27,5 @@ class UserInfo(SQLModel):
 
 
 from schemes.chat.users_in_chat_scheme import UsersInChat
-from schemes.chat.message_scheme import Message
-from schemes.chat.message_action_scheme import MessageAction
+from schemes.message.message_scheme import Message
+from schemes.message.message_action_scheme import MessageAction

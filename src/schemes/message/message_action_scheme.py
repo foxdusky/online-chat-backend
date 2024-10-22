@@ -17,5 +17,5 @@ class MessageAction(MessageActionBase, table=True):
     user: 'User' = Relationship(back_populates='actions')
 
 
-from schemes.chat.message_scheme import Message
+from schemes.message.message_scheme import Message
 from schemes.user.user_scheme import User

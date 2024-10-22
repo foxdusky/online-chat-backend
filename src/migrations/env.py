@@ -27,10 +27,9 @@ if config.config_file_name is not None:
 # ------- Our Models ------- #
 from schemes.user.user_scheme import User
 from schemes.chat.chat_scheme import Chat
-from schemes.chat.message_scheme import Message
-from schemes.chat.message_action_scheme import MessageAction
 from schemes.chat.users_in_chat_scheme import UsersInChat
-
+from schemes.message.message_scheme import Message
+from schemes.message.message_action_scheme import MessageAction
 # -------------------------- #
 
 target_metadata = SQLModel.metadata

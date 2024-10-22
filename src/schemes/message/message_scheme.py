@@ -19,5 +19,5 @@ class Message(MessageBase, table=True):
 
 
 from schemes.chat.chat_scheme import Chat
-from schemes.chat.message_action_scheme import MessageAction
+from schemes.message.message_action_scheme import MessageAction
 from schemes.user.user_scheme import User
