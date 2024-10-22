@@ -42,8 +42,8 @@ def get_all_users(session: Session) -> list[User]:
 
 
 def create_user(session: Session, user: User) -> User:
-    _check_login_unique(session, user.user.username)
-    user.password = _get_password_hash(user.user.password)
+    _check_login_unique(session, user.username)
+    user.password = _get_password_hash(user.password)
     return user_repository.create_user(session, user)
 
 
@@ -53,7 +53,7 @@ def delete_user(session: Session, user_id: int):
 
 
 def update_user(session: Session, user: User) -> User:
-    user_id = user.user.id
+    user_id = user.id
     db_user = get_user_by_id(session, user_id)
     if db_user.username != user.username:
         _check_login_unique(session, user.username)
