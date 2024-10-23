@@ -6,6 +6,14 @@ from repositories.user import user_repository
 from schemes.user.user_scheme import User
 
 
+def _check_operation_available(current_user: User, user_on_action: User) -> None:
+    if current_user.id != user_on_action:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail=f"Access denied",
+        )
+
+
 def get_user_by_id(session: Session, user_id: int) -> User:
     user = user_repository.get_user_by_id(session, user_id)
 
@@ -47,17 +55,19 @@ def create_user(session: Session, user: User) -> User:
     return user_repository.create_user(session, user)
 
 
-def delete_user(session: Session, user_id: int):
-    db_user = get_user_by_id(session, user_id)
-    return user_repository.delete_user(session, db_user)
+def update_user(session: Session, user: User, current_user: User) -> User:
+    db_user = get_user_by_id(session, user.id)
+    _check_operation_available(current_user=current_user, user_on_action=db_user)
 
-
-def update_user(session: Session, user: User) -> User:
-    user_id = user.id
-    db_user = get_user_by_id(session, user_id)
     if db_user.username != user.username:
         _check_login_unique(session, user.username)
     if user.password is not None:
         user.password = _get_password_hash(user.password)
 
     return user_repository.update_user(session, user)
+
+
+def delete_user(session: Session, user_id: int, current_user: User):
+    db_user = get_user_by_id(session, user_id)
+    _check_operation_available(current_user=current_user, user_on_action=db_user)
+    return user_repository.delete_user(session, db_user)

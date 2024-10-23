@@ -23,7 +23,7 @@ class UserInfo(SQLModel):
     reg_at: datetime
 
     # TODO:
-    last_online: datetime | None
+    # last_online: datetime | None
 
 
 from schemes.chat.users_in_chat_scheme import UsersInChat
