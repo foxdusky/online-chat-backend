@@ -3,7 +3,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from sqlmodel import Session
 
 from db import get_session
-from models.user import auth_model
+from models.user import auth_model, user_model
 from schemes.user.user_scheme import User
 from schemes.user.auth_scheme import AuthToken
 
@@ -28,6 +28,6 @@ async def reg(
         session: Session = Depends(get_session),
 
 ):
-    # token = auth_model.sign_in(session)
-    # return token
-    pass
+    new_user = user_model.create_user(session, user)
+    token = auth_model.sign_in(session, new_user.username, new_user.password)
+    return token
