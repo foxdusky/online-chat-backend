@@ -15,8 +15,8 @@ auth_router = APIRouter(
 
 @auth_router.post("/sign_in/", response_model=AuthToken)
 async def sign_in(
-        session: Session = Depends(get_session),
-        form_data: OAuth2PasswordRequestForm = Depends()
+    session: Session = Depends(get_session),
+    form_data: OAuth2PasswordRequestForm = Depends()
 ):
     token = auth_model.sign_in(session, form_data.username, form_data.password)
     return token
@@ -24,10 +24,10 @@ async def sign_in(
 
 @auth_router.post("/registration/", response_model=AuthToken)
 async def reg(
-        user: User,
-        session: Session = Depends(get_session),
+    user: User,
+    session: Session = Depends(get_session),
 
 ):
     new_user = user_model.create_user(session, user)
-    token = auth_model.sign_in(session, new_user.username, new_user.password)
+    token = auth_model.sign_in(session, new_user.username, user.password)
     return token
