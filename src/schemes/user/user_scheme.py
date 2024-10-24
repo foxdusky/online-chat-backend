@@ -1,6 +1,7 @@
 from datetime import datetime
 
 from sqlmodel import SQLModel, Field, Relationship
+from schemes.chat.users_in_chat_scheme import UsersInChat
 
 
 class UserBase(SQLModel):
@@ -12,9 +13,9 @@ class UserBase(SQLModel):
 
 class User(UserBase, table=True):
     __tablename__ = "user"
-    chats: list["UsersInChat"] = Relationship(back_populates='user')  # many-to-many через UsersInChat
-    messages: list["Message"] = Relationship(back_populates='user')
-    actions: list["MessageAction"] = Relationship(back_populates='user')
+    chats: list['Chat'] = Relationship(back_populates='users', link_model=UsersInChat)  # many-to-many через UsersInChat
+    messages: list['Message'] = Relationship(back_populates='user')
+    actions: list['MessageAction'] = Relationship(back_populates='user')
 
 
 class UserInfo(SQLModel):
@@ -26,6 +27,6 @@ class UserInfo(SQLModel):
     # last_online: datetime | None
 
 
-from schemes.chat.users_in_chat_scheme import UsersInChat
+from schemes.chat.chat_scheme import Chat
 from schemes.message.message_scheme import Message
 from schemes.message.message_action_scheme import MessageAction

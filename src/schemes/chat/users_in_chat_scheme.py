@@ -1,4 +1,4 @@
-from sqlmodel import SQLModel, Field, Relationship
+from sqlmodel import SQLModel, Field
 
 
 class UsersInChatBase(SQLModel):
@@ -9,9 +9,3 @@ class UsersInChatBase(SQLModel):
 
 class UsersInChat(UsersInChatBase, table=True):
     __tablename__ = "users_in_chat"
-    user: "User" = Relationship(back_populates='chats')
-    chat: "Chat" = Relationship(back_populates='users')
-
-
-from schemes.user.user_scheme import User
-from schemes.chat.chat_scheme import Chat
