@@ -3,6 +3,13 @@ from sqlmodel import Session, select
 from schemes.chat.users_in_chat_scheme import UsersInChat
 
 
+def check_user_in_chat(session: Session, user_id: int, chat_id: int):
+    st = select(UsersInChat)
+    st = st.where(UsersInChat.chat_id == chat_id)
+    st = st.where(UsersInChat.user_id == user_id)
+    return session.exec(st).first()
+
+
 def get_all_users_in_chat(session: Session) -> list[UsersInChat]:
     st = select(UsersInChat)
     result = session.exec(st).all()
