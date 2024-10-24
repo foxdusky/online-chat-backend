@@ -16,6 +16,14 @@ user_router = APIRouter(
 )
 
 
+@user_router.get("/current/", response_model=User)
+async def get_current_user_with_roles_and_permissions(
+    session: Session = Depends(get_session),
+    current_user: User = Depends(get_current_user),
+):
+    return user_model.get_user_by_id(session, current_user.id)
+
+
 @user_router.get("/{user_id}", response_model=UserInfo, description="Function for getting user by his id")
 async def get_by_id(
     user_id: int,
