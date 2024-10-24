@@ -1,3 +1,5 @@
 class WSQueue:
     # Users
-    USER = "user"
+    USER = 'user'
+    CHAT = 'chat'
+    MESSAGE = 'message'
