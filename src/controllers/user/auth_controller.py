@@ -23,11 +23,12 @@ async def sign_in(
 
 
 @auth_router.post("/registration/", response_model=AuthToken)
-async def reg(
+def reg(
     user: User,
     session: Session = Depends(get_session),
 
 ):
-    new_user = user_model.create_user(session, user)
-    token = auth_model.sign_in(session, new_user.username, user.password)
+    password = user.password
+    user_model.create_user(session, user)
+    token = auth_model.sign_in(session, user.username, password)
     return token

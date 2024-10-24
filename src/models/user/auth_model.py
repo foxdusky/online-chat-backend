@@ -93,8 +93,8 @@ def _verify_jwt_token(token: str):
 
 
 def get_current_user(
-        session: Session = Depends(get_session),
-        token: str = Depends(oauth2_scheme)
+    session: Session = Depends(get_session),
+    token: str = Depends(oauth2_scheme)
 ) -> User:
     user_id = _verify_jwt_token(token)
     user = auth_repository.get_user_by_id(session, user_id)
