@@ -1,5 +1,7 @@
 from sqlmodel import SQLModel, Field, Relationship
 
+from schemes.constant.request_scheme import DefaultRequestParam
+
 from schemes.chat.users_in_chat_scheme import UsersInChat
 
 
