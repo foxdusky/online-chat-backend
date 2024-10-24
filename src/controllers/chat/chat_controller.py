@@ -25,7 +25,7 @@ async def get_all_chats(
     return chat_model.get_all_chats(session, current_user)
 
 
-@chat_router.post("/{chat_id}", response_model=ChatWithMessagesAndUsers)
+@chat_router.post("/id/", response_model=ChatWithMessagesAndUsers)
 async def get_by_id(
     body: RequestAll,
     session: Session = Depends(get_session),
