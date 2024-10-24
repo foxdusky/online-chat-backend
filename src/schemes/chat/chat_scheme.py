@@ -17,5 +17,26 @@ class Chat(ChatBase, table=True):
     messages: list['Message'] = Relationship(back_populates='chat')
 
 
-from schemes.chat.users_in_chat_scheme import UsersInChat
+class ChatWithUsers(ChatBase):
+    users: list['UserInfo']
+
+
+class ChatWithMessagesAndUsers(ChatBase):
+    users: list['UserInfo']
+    messages: list['Message']
+
+
+class CreateChat(SQLModel):
+    type: str | None
+    users: list[int]
+
+
+class RequestAll(DefaultRequestParam):
+    chat_id: int
+
+
+from schemes.user.user_scheme import User, UserInfo
 from schemes.message.message_scheme import Message
+
+ChatWithUsers.model_rebuild()
+ChatWithMessagesAndUsers.model_rebuild()
