@@ -18,6 +18,11 @@ class Message(MessageBase, table=True):
     user: "User" = Relationship(back_populates='messages')
 
 
+class MessageSend(SQLModel):
+    chat_id: int
+    content: str
+
+
 from schemes.chat.chat_scheme import Chat
 from schemes.message.message_action_scheme import MessageAction
 from schemes.user.user_scheme import User
