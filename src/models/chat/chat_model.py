@@ -9,8 +9,8 @@ from schemes.chat.users_in_chat_scheme import UsersInChat
 from schemes.user.user_scheme import User
 
 
-def get_chat_by_id(session: Session, body: RequestAll, current_user: User) -> Chat:
-    chat = chat_repository.get_chat_by_id(session, body.chat_id)
+def get_chat_by_id(session: Session, body: RequestAll, current_user: User) -> ChatWithMessagesAndUsers:
+    chat = chat_repository.get_chat_by_id(session, body.chat_id, body.limit, body.offset)
     check_user_in_chat(session, user_id=current_user.id, chat_id=body.chat_id)
 
     if not chat:

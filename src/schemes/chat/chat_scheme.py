@@ -23,7 +23,8 @@ class ChatWithUsers(ChatBase):
 
 class ChatWithMessagesAndUsers(ChatBase):
     users: list['UserInfo']
-    messages: list['Message']
+    count: int | None
+    messages: list['Message'] | None
 
 
 class CreateChat(SQLModel):
